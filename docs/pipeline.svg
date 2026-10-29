@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1210" viewBox="0 0 800 1210" role="img" aria-labelledby="title description">
+  <title id="title">Планируемая схема работы антифрод-системы</title>
+  <desc id="description">Заявка на перевод сохраняется со статусом pending. Python готовит признаки отправителя, получателя и их взаимодействия по истории PostgreSQL, а ML-модель оценивает риск. При низком риске показывается обычное подтверждение, при повышенном — предупреждение с объяснением. После решения пользователя сервер проверяет актуальность оценки и выполняет перевод однократно либо отменяет его. Для обучения используются подтверждённые метки мошенничества, а не ответы на предупреждения.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#334155"/>
+    </marker>
+  </defs>
+  <rect width="800" height="1210" fill="#ffffff"/>
+  <g font-family="Arial, Helvetica, sans-serif" text-anchor="middle" fill="#0f172a">
+    <text x="400" y="36" font-size="25" font-weight="bold">Схема проверки переводов</text>
+    <text x="400" y="62" font-size="15" fill="#475569">Планируемая архитектура · Python + PostgreSQL</text>
+
+    <g stroke="#334155" stroke-width="2" fill="none" marker-end="url(#arrow)">
+      <path d="M 400 160 V 190"/>
+      <path d="M 400 280 V 310"/>
+      <path d="M 400 430 V 460"/>
+      <path d="M 400 540 V 570"/>
+      <path d="M 400 660 V 684 H 205 V 710"/>
+      <path d="M 400 684 H 595 V 710"/>
+      <path d="M 205 835 V 865 H 400 V 895"/>
+      <path d="M 595 835 V 865 H 400"/>
+      <path d="M 400 995 V 1025"/>
+    </g>
+
+    <rect x="100" y="90" width="600" height="70" rx="12" fill="#eff6ff" stroke="#2563eb"/>
+    <text x="400" y="118" font-size="19" font-weight="bold">1. Пользователь создаёт заявку на перевод</text>
+    <text x="400" y="144" font-size="16">Счёт отправителя + счёт получателя + сумма + валюта</text>
+
+    <rect x="100" y="190" width="600" height="90" rx="12" fill="#eff6ff" stroke="#2563eb"/>
+    <text x="400" y="218" font-size="19" font-weight="bold">2. API на Python создаёт транзакцию pending</text>
+    <text x="400" y="244" font-size="16">Заявка сохраняется в PostgreSQL</text>
+    <text x="400" y="266" font-size="16" font-weight="bold">Деньги на этом этапе не переводятся</text>
+
+    <rect x="100" y="310" width="600" height="120" rx="12" fill="#f0fdf4" stroke="#15803d"/>
+    <text x="400" y="338" font-size="19" font-weight="bold">3. Подготовка признаков по истории PostgreSQL</text>
+    <text x="400" y="364" font-size="16">Отправитель: обычные суммы и частота переводов</text>
+    <text x="400" y="387" font-size="16">Получатель: возраст счёта и входящие операции</text>
+    <text x="400" y="410" font-size="16">Связь: предыдущие переводы между этими счетами</text>
+
+    <rect x="100" y="460" width="600" height="80" rx="12" fill="#eff6ff" stroke="#2563eb"/>
+    <text x="400" y="490" font-size="19" font-weight="bold">4. ML-модель на Python оценивает риск</text>
+    <text x="400" y="518" font-size="16">Признаки отправителя, получателя и контекст перевода</text>
+
+    <rect x="100" y="570" width="600" height="90" rx="12" fill="#f0fdf4" stroke="#15803d"/>
+    <text x="400" y="598" font-size="19" font-weight="bold">5. Сохранение и возврат оценки</text>
+    <text x="400" y="624" font-size="16">Оценка риска + версия модели + время проверки</text>
+    <text x="400" y="647" font-size="16">Интерфейс получает коды обоснованных причин предупреждения</text>
+
+    <rect x="40" y="710" width="330" height="125" rx="12" fill="#eff6ff" stroke="#2563eb"/>
+    <text x="205" y="742" font-size="19" font-weight="bold">Низкий риск</text>
+    <text x="205" y="773" font-size="16">Обычный экран подтверждения</text>
+    <text x="205" y="803" font-size="16">Подтвердить или отменить</text>
+
+    <rect x="430" y="710" width="330" height="125" rx="12" fill="#fffbeb" stroke="#b45309"/>
+    <text x="595" y="742" font-size="19" font-weight="bold">Повышенный риск</text>
+    <text x="595" y="771" font-size="16">Окно с объяснением риска</text>
+    <text x="595" y="795" font-size="16">Отмена / проверка / продолжение</text>
+    <text x="595" y="819" font-size="14">(Продолжить, если разрешено правилами)</text>
+
+    <rect x="100" y="895" width="600" height="100" rx="12" fill="#eff6ff" stroke="#2563eb"/>
+    <text x="400" y="923" font-size="19" font-weight="bold">6. Сервер обрабатывает решение пользователя</text>
+    <text x="400" y="949" font-size="16">При подтверждении: проверка актуальности оценки и правил</text>
+    <text x="400" y="973" font-size="16">Выполнить один раз или отменить; при изменениях — новая оценка</text>
+
+    <rect x="100" y="1025" width="600" height="80" rx="12" fill="#f0fdf4" stroke="#15803d"/>
+    <text x="400" y="1055" font-size="19" font-weight="bold">7. Сохранение результата в PostgreSQL</text>
+    <text x="400" y="1083" font-size="16">Статус перевода + показ предупреждения + ответ пользователя</text>
+
+    <text x="400" y="1144" font-size="16" font-weight="bold">Для обучения нужны подтверждённые метки мошенничества</text>
+    <text x="400" y="1170" font-size="15" fill="#475569">Продолжение после предупреждения не доказывает безопасность перевода.</text>
+    <text x="400" y="1193" font-size="15" fill="#475569">Признаки строятся только по данным, доступным до текущего перевода.</text>
+  </g>
+</svg>
